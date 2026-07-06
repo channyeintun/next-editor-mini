@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Lesson: xstate + Delta Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/src/index.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-left">
+        <h1>xstate + Delta Editor</h1>
+        <span class="status-badge" id="state">idle</span>
+      </div>
+      <div class="header-right">
+        <span class="player-badge" id="player-state">paused</span>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="editor-panel">
+        <div class="textarea-wrapper">
+          <textarea id="editor" spellcheck="false" placeholder="Start typing to log deltas..."></textarea>
+          <div id="selection-overlay"></div>
+          <div id="fake-caret"></div>
+        </div>
+        <div class="controls-bar">
+          <div class="btn-group">
+            <button id="undo" disabled title="Undo (Seek Back)">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+              Undo
+            </button>
+            <button id="redo" disabled title="Redo (Seek Forward)">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"/></svg>
+              Redo
+            </button>
+          </div>
+          <div class="divider"></div>
+          <div class="btn-group">
+            <button id="record" class="btn-record">Record</button>
+            <button id="play" class="btn-primary" disabled>Play</button>
+            <button id="restart">Restart</button>
+          </div>
+          <input type="range" id="timeline" min="0" max="0" step="1" value="0" />
+        </div>
+      </section>
+
+      <section class="log-panel">
+        <h2 class="panel-title">Delta Log</h2>
+        <div id="log" class="custom-scrollbar"></div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
