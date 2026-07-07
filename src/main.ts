@@ -33,7 +33,7 @@ editorEl.addEventListener("input", () => {
   const { text } = editorActor.getSnapshot().context;
   const delta = diffText(text, editorEl.value);
   const editEvent = { type: "EDIT" as const, delta };
-  const atMs = recordingStart ? Date.now() - recordingStart : 0;
+  const atMs = recordingStart ? performance.now() - recordingStart : 0;
   player.send({ type: "RECORD_EDIT", atMs, editEvent });
 });
 
@@ -50,7 +50,7 @@ editorEl.addEventListener("selectionchange", () => {
   if (selectionStart === prevStart && selectionEnd === prevEnd && selectionDirection === prevDir) return;
 
   const selEvent = { type: "SELECTION" as const, selectionStart, selectionEnd, selectionDirection };
-  const atMs = recordingStart ? Date.now() - recordingStart : 0;
+  const atMs = recordingStart ? performance.now() - recordingStart : 0;
   player.send({ type: "RECORD_EDIT", atMs, editEvent: selEvent });
 });
 
@@ -158,7 +158,7 @@ recordBtn.addEventListener("click", () => {
   } else {
     const { cursor, recording } = player.getSnapshot().context;
     const elapsed = cursor > 0 && recording[cursor - 1] ? recording[cursor - 1].atMs : 0;
-    recordingStart = Date.now() - elapsed;
+    recordingStart = performance.now() - elapsed;
     player.send({ type: "START_RECORDING" });
     // Focus the textarea so the user can immediately type
     editorEl.focus();
