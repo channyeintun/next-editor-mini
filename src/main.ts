@@ -105,8 +105,8 @@ player.subscribe((snapshot) => {
     recordBtn.disabled = playerState === "playing";
   }
 
-  // Make editor read-only unless we are explicitly recording
-  editorEl.readOnly = playerState !== "recording";
+  // Make editor read-only when playing
+  editorEl.readOnly = playerState === "playing";
 
   // Show fake caret during playing, or when paused/done (i.e. reviewing)
   const showCaret = playerState === "playing" || playerState === "done"
